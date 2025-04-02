@@ -1,3 +1,5 @@
+package ua.lpnu;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

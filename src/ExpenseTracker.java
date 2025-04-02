@@ -1,3 +1,5 @@
+package ua.lpnu;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,7 +9,7 @@ public class ExpenseTracker {
     private JList<String> expenseList;
     private JTextField amountInput, dateInput, commentInput;
     private JComboBox<String> categoryBox;
-    private JButton addButton, removeButton, editButton, sortButton, filterButton, statsButton, clearButton;
+    private JButton addButton, removeButton, editButton, sortButton, filterButton, statsButton, clearButton, exportButton;
 
     public ExpenseTracker() {
         frame = new JFrame("Трекер Витрат");
@@ -41,7 +43,7 @@ public class ExpenseTracker {
 
         frame.add(inputPanel, BorderLayout.NORTH);
 
-        JPanel buttonPanel = new JPanel(new GridLayout(2, 3, 10, 10));
+        JPanel buttonPanel = new JPanel(new GridLayout(2, 4, 10, 10)); // Змінено на 4 стовпці
         buttonPanel.setBackground(new Color(180, 220, 240));
 
         removeButton = UIHelper.createStyledButton("Видалити");
@@ -50,6 +52,7 @@ public class ExpenseTracker {
         filterButton = UIHelper.createStyledButton("Фільтр");
         statsButton = UIHelper.createStyledButton("Статистика");
         clearButton = UIHelper.createStyledButton("Очистити все");
+        exportButton = UIHelper.createStyledButton("Експортувати");
 
         buttonPanel.add(removeButton);
         buttonPanel.add(editButton);
@@ -57,6 +60,7 @@ public class ExpenseTracker {
         buttonPanel.add(filterButton);
         buttonPanel.add(statsButton);
         buttonPanel.add(clearButton);
+        buttonPanel.add(exportButton); // Додаємо кнопку експорту
 
         frame.add(buttonPanel, BorderLayout.SOUTH);
 
@@ -69,6 +73,7 @@ public class ExpenseTracker {
         filterButton.addActionListener(e -> handler.filterExpenses());
         statsButton.addActionListener(e -> handler.showStatistics());
         clearButton.addActionListener(e -> handler.clearExpenses());
+        exportButton.addActionListener(e -> handler.exportExpensesToFile()); // Додаємо обробник події для експорту
 
         frame.setVisible(true);
     }

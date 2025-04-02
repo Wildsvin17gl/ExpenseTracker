@@ -1,4 +1,7 @@
+package ua.lpnu;
+
 import javax.swing.*;
+import java.io.*;
 import java.util.*;
 
 public class ExpenseHandler {
@@ -94,5 +97,25 @@ public class ExpenseHandler {
     public void clearExpenses() {
         expenseListModel.clear();
         expenseDetails.clear();
+    }
+
+    // Додаємо метод для експорту витрат у файл
+    public void exportExpensesToFile() {
+        try {
+            File file = new File("expenses.txt");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+
+            for (int i = 0; i < expenseListModel.size(); i++) {
+                writer.write(expenseListModel.getElementAt(i));
+                writer.newLine();
+            }
+
+            writer.close();
+            JOptionPane.showMessageDialog(null, "Витрати збережено у файл: expenses.txt",
+                    "Експорт завершено", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Помилка при збереженні файлу!",
+                    "Помилка", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
